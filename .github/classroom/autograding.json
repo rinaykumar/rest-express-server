@@ -1,0 +1,54 @@
+{
+  "tests": [
+    {
+      "name": "Default",
+      "setup": "npm install",
+      "run": "npx jest tests/default.test.js ",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Delete",
+      "setup": "npm install",
+      "run": "npx jest tests/delete.test.js ",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Filter",
+      "setup": "npm install",
+      "run": "npx jest tests/filter.test.js ",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Inquiry",
+      "setup": "npm install",
+      "run": "npx jest tests/inquiry.test.js ",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    },
+    {
+      "name": "Store",
+      "setup": "npm install",
+      "run": "npx jest tests/store.test.js",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 20
+    }
+  ]
+}
