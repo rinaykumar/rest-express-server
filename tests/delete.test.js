@@ -21,7 +21,7 @@ describe("Should Store Data", () => {
         expect(data.items[0].type === 'gymEquipment');
         expect(data.items[0].price === '123');
         expect(data.items[0].id.length === 8);
-        id = data.items[0].id.length;
+        id = data.items[0].id;
         console.log(data);
       })
       .then(() => testApp.get(`/api/deleteListing?id=${id}`))
