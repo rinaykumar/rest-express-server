@@ -1,10 +1,8 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const {nanoid} = require('nanoid');
 const app = express();
 
 app.use(express.json())
-app.use(bodyParser.json());
 
 // Items database
 let items = [];
@@ -39,8 +37,35 @@ app.get('/api/viewListings', (req, res) => {
 // /api/deleteListing?id=<id>
 
 // /api/getInquiries?listingId=<listingId>
+app.get('/api/getInquiries', (req, res) => {
+  let id = req.query.listingId;
+  let itemIndex = items.findIndex(item => item.id === id);
+
+  if (itemIndex < 0) {
+    res.json({sucess: true, items: items, inquiries: 0, errorCode: null});
+  } else {
+    res.json({sucess: true, items: items, inquiries: items[itemIndex].inquiries, errorCode: null});
+  }
+});
 
 // /api/makeInquiry (post)
+app.post('/api/makeInquiry', (req, res) => {
+  let id = req.query.listingId;
+  let message = req.body.message;
+  let inquiry = new Object();
+  let inquiries = [];
+  let itemIndex = items.findIndex(item => item.id === id);
+
+  if (itemIndex < 0) {
+    res.json({sucess: false, items: items, inquiries: null, errorCode: null});
+  } else {
+    inquiry.message = message;
+    inquiry.id = id;
+    inquiries.push(inquiry);
+    items[itemIndex].inquiries = inquiries;
+    res.json({sucess: true, items: items, inquiries: items[itemIndex].inquiries, errorCode: null});
+  }
+});
 
 // Random endpoints, sucess: fails and errorCode: 404
 app.get('/*', (req, res) => {
