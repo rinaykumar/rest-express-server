@@ -27,14 +27,31 @@ app.post('/api/createListing', (req, res) => {
   res.json({sucess: true, items: items, inquiries: null, errorCode: null});
 });
 
-// /api/viewListings
+// /api/viewListings and /api/viewListings?type=<type>
 app.get('/api/viewListings', (req, res) => {
-  res.json({sucess: true, items: items, inquiries: null, errorCode: null});
+  let type = req.query.type;
+  let typeItems = [];
+
+  if (type === undefined) {
+    res.json({sucess: true, items: items, inquiries: null, errorCode: null});
+  } else {
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type === type) {
+        typeItems.push(items[i]);
+      }
+    }
+    res.json({sucess: true, items: typeItems, inquiries: null, errorCode: null});
+  } 
 });
 
-// /api/viewListings?type=<type>
-
 // /api/deleteListing?id=<id>
+app.get('/api/deleteListing', (req, res) => {
+  let id = req.query.id;
+  let itemIndex = items.findIndex(item => item.id === id);
+
+  delete items[itemIndex];
+  res.json({sucess: true, items: items, inquiries: null, errorCode: null});
+});
 
 // /api/getInquiries?listingId=<listingId>
 app.get('/api/getInquiries', (req, res) => {
